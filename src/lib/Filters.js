@@ -163,14 +163,19 @@ export const Constraints = {
     field: null,
     comparable: false
   },
+  custom: {
+    name: 'custom',
+    field: 'String',
+    comparable: true
+  },
 };
 
 export const FieldConstraints = {
-  'Pointer': [ 'exists', 'dne', 'eq', 'neq', 'unique' ],
-  'Boolean': [ 'exists', 'dne', 'eq', 'unique' ],
-  'Number': [ 'exists', 'dne', 'eq', 'neq', 'lt', 'lte', 'gt', 'gte', 'unique' ],
-  'String': [ 'exists', 'dne', 'eq', 'neq', 'starts', 'ends', 'stringContainsString', 'unique' ],
-  'Date': [ 'exists', 'dne', 'before', 'after', 'unique' ],
+  'Pointer': ['exists', 'dne', 'eq', 'neq', 'unique', 'custom'],
+  'Boolean': ['exists', 'dne', 'eq', 'unique', 'custom'],
+  'Number': ['exists', 'dne', 'eq', 'neq', 'lt', 'lte', 'gt', 'gte', 'unique', 'custom'],
+  'String': ['exists', 'dne', 'eq', 'neq', 'starts', 'ends', 'stringContainsString', 'unique', 'custom'],
+  'Date': ['exists', 'dne', 'before', 'after', 'unique', 'custom'],
   'Object': [
     'exists',
     'dne',
@@ -183,6 +188,7 @@ export const FieldConstraints = {
     'keyLt',
     'keyLte',
     'unique',
+    'custom'
   ],
   'Array': [
     'exists',
@@ -193,6 +199,7 @@ export const FieldConstraints = {
     'doesNotContainNumber',
     'containsAny',
     'doesNotContainAny',
+    'custom'
   ]
 };
 
@@ -233,4 +240,4 @@ export function availableFilters(schema, currentFilters, blacklist) {
   return available;
 }
 
-export const BLACKLISTED_FILTERS = [ 'containsAny', 'doesNotContainAny' ];
+export const BLACKLISTED_FILTERS = ['containsAny', 'doesNotContainAny'];
