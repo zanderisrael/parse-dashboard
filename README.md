@@ -11,31 +11,32 @@
 
 Parse Dashboard is a standalone dashboard for managing your [Parse Server](https://github.com/ParsePlatform/parse-server) apps.
 
-* [Getting Started](#getting-started)
-* [Local Installation](#local-installation)
-  * [Configuring Parse Dashboard](#configuring-parse-dashboard)
-    * [File](#file)
-    * [Environment variables](#environment-variables)
-      * [Multiple apps](#multiple-apps)
-      * [Single app](#single-app)
-  * [Managing Multiple Apps](#managing-multiple-apps)
-  * [GraphQL Playground](#graphql-playground)    
-  * [App Icon Configuration](#app-icon-configuration)
-  * [App Background Color Configuration](#app-background-color-configuration)
-  * [Other Configuration Options](#other-configuration-options)
-* [Running as Express Middleware](#running-as-express-middleware)
-* [Deploying Parse Dashboard](#deploying-parse-dashboard)
-  * [Preparing for Deployment](#preparing-for-deployment)
-  * [Security Considerations](#security-considerations)
-    * [Configuring Basic Authentication](#configuring-basic-authentication)
-    * [Separating App Access Based on User Identity](#separating-app-access-based-on-user-identity)
-  * [Use Read-Only masterKey](#use-read-only-masterKey)
-    * [Making an app read-only for all users](#making-an-app-read-only-for-all-users)
-    * [Makings users read-only](#makings-users-read-only)
-    * [Making user's apps readOnly](#making-users-apps-readonly)
-  * [Configuring Localized Push Notifications](#configuring-localized-push-notifications)
-  * [Run with Docker](#run-with-docker)
-* [Contributing](#contributing)
+- [Parse Dashboard](#parse-dashboard)
+- [Getting Started](#getting-started)
+- [Local Installation](#local-installation)
+  - [Configuring Parse Dashboard](#configuring-parse-dashboard)
+    - [File](#file)
+    - [Environment variables](#environment-variables)
+      - [Multiple apps](#multiple-apps)
+      - [Single app](#single-app)
+  - [Managing Multiple Apps](#managing-multiple-apps)
+  - [GraphQL Playground](#graphql-playground)
+  - [App Icon Configuration](#app-icon-configuration)
+  - [App Background Color Configuration](#app-background-color-configuration)
+  - [Other Configuration Options](#other-configuration-options)
+- [Running as Express Middleware](#running-as-express-middleware)
+- [Deploying Parse Dashboard](#deploying-parse-dashboard)
+  - [Preparing for Deployment](#preparing-for-deployment)
+  - [Security Considerations](#security-considerations)
+    - [Configuring Basic Authentication](#configuring-basic-authentication)
+    - [Separating App Access Based on User Identity](#separating-app-access-based-on-user-identity)
+  - [Use Read-Only masterKey](#use-read-only-masterkey)
+    - [Making an app read-only for all users](#making-an-app-read-only-for-all-users)
+    - [Makings users read-only](#makings-users-read-only)
+    - [Making user's apps readOnly](#making-users-apps-readonly)
+  - [Configuring Localized Push Notifications](#configuring-localized-push-notifications)
+  - [Run with Docker](#run-with-docker)
+- [Contributing](#contributing)
 
 # Getting Started
 
@@ -57,7 +58,7 @@ parse-dashboard --dev --appId yourAppId --masterKey yourMasterKey --serverURL "h
 
 You may set the host, port and mount path by supplying the `--host`, `--port` and `--mountPath` options to parse-dashboard. You can use anything you want as the app name, or leave it out in which case the app ID will be used.
 
-NB: the `--dev` parameter is disabling production-ready security features, do not use this parameter when starting the dashboard in production. This parameter is useful if you are running on docker. 
+NB: the `--dev` parameter is disabling production-ready security features, do not use this parameter when starting the dashboard in production. This parameter is useful if you are running on docker.
 
 After starting the dashboard, you can visit http://localhost:4040 in your browser:
 
@@ -67,7 +68,7 @@ After starting the dashboard, you can visit http://localhost:4040 in your browse
 
 ### File
 
-You can also start the dashboard from the command line with a config file.  To do this, create a new file called `parse-dashboard-config.json` inside your local Parse Dashboard directory hierarchy.  The file should match the following format:
+You can also start the dashboard from the command line with a config file. To do this, create a new file called `parse-dashboard-config.json` inside your local Parse Dashboard directory hierarchy. The file should match the following format:
 
 ```json
 {
@@ -191,7 +192,7 @@ After starting the dashboard, you can visit http://0.0.0.0:4040/apps/MyTestApp/a
 
 ## App Icon Configuration
 
-Parse Dashboard supports adding an optional icon for each app, so you can identify them easier in the list. To do so, you *must* use the configuration file, define an `iconsFolder` in it, and define the `iconName` parameter for each app (including the extension). The path of the `iconsFolder` is relative to the configuration file. If you have installed ParseDashboard globally you need to use the full path as value for the `iconsFolder`. To visualize what it means, in the following example `icons` is a directory located under the same directory as the configuration file:
+Parse Dashboard supports adding an optional icon for each app, so you can identify them easier in the list. To do so, you _must_ use the configuration file, define an `iconsFolder` in it, and define the `iconName` parameter for each app (including the extension). The path of the `iconsFolder` is relative to the configuration file. If you have installed ParseDashboard globally you need to use the full path as value for the `iconsFolder`. To visualize what it means, in the following example `icons` is a directory located under the same directory as the configuration file:
 
 ```json
 {
@@ -201,7 +202,7 @@ Parse Dashboard supports adding an optional icon for each app, so you can identi
       "appId": "myAppId",
       "masterKey": "myMasterKey",
       "appName": "My Parse Server App",
-      "iconName": "MyAppIcon.png",
+      "iconName": "MyAppIcon.png"
     }
   ],
   "iconsFolder": "icons"
@@ -210,7 +211,7 @@ Parse Dashboard supports adding an optional icon for each app, so you can identi
 
 ## App Background Color Configuration
 
-Parse Dashboard supports adding an optional background color for each app, so you can identify them easier in the list. To do so, you *must* use the configuration file, define an `primaryBackgroundColor` and `secondaryBackgroundColor` in it, parameter for each app. It is `CSS style`. To visualize what it means, in the following example `backgroundColor` is a configuration file:
+Parse Dashboard supports adding an optional background color for each app, so you can identify them easier in the list. To do so, you _must_ use the configuration file, define an `primaryBackgroundColor` and `secondaryBackgroundColor` in it, parameter for each app. It is `CSS style`. To visualize what it means, in the following example `backgroundColor` is a configuration file:
 
 ```json
 {
@@ -246,55 +247,58 @@ To change the app to production, simply set `production` to `true` in your confi
 Instead of starting Parse Dashboard with the CLI, you can also run it as an [express](https://github.com/expressjs/express) middleware.
 
 ```javascript
-var express = require('express');
-var ParseDashboard = require('parse-dashboard');
+var express = require("express");
+var ParseDashboard = require("parse-dashboard");
 
 var dashboard = new ParseDashboard({
-  "apps": [
+  apps: [
     {
-      "serverURL": "http://localhost:1337/parse",
-      "appId": "myAppId",
-      "masterKey": "myMasterKey",
-      "appName": "MyApp"
-    }
-  ]
+      serverURL: "http://localhost:1337/parse",
+      appId: "myAppId",
+      masterKey: "myMasterKey",
+      appName: "MyApp",
+    },
+  ],
 });
 
 var app = express();
 
 // make the Parse Dashboard available at /dashboard
-app.use('/dashboard', dashboard);
+app.use("/dashboard", dashboard);
 
-var httpServer = require('http').createServer(app);
+var httpServer = require("http").createServer(app);
 httpServer.listen(4040);
 ```
 
 If you want to run both [Parse Server](https://github.com/ParsePlatform/parse-server) and Parse Dashboard on the same server/port, you can run them both as express middleware:
 
 ```javascript
-var express = require('express');
-var ParseServer = require('parse-server').ParseServer;
-var ParseDashboard = require('parse-dashboard');
+var express = require("express");
+var ParseServer = require("parse-server").ParseServer;
+var ParseDashboard = require("parse-dashboard");
 
 var api = new ParseServer({
-	// Parse Server settings
+  // Parse Server settings
 });
 
 var options = { allowInsecureHTTP: false };
 
-var dashboard = new ParseDashboard({
-	// Parse Dashboard settings
-}, options);
+var dashboard = new ParseDashboard(
+  {
+    // Parse Dashboard settings
+  },
+  options
+);
 
 var app = express();
 
 // make the Parse Server available at /parse
-app.use('/parse', api);
+app.use("/parse", api);
 
 // make the Parse Dashboard available at /dashboard
-app.use('/dashboard', dashboard);
+app.use("/dashboard", dashboard);
 
-var httpServer = require('http').createServer(app);
+var httpServer = require("http").createServer(app);
 httpServer.listen(4040);
 ```
 
@@ -305,41 +309,41 @@ httpServer.listen(4040);
 Make sure the server URLs for your apps can be accessed by your browser. If you are deploying the dashboard, then `localhost` urls will not work.
 
 ## Security Considerations
+
 In order to securely deploy the dashboard without leaking your apps master key, you will need to use HTTPS and Basic Authentication.
 
-The deployed dashboard detects if you are using a secure connection. If you are deploying the dashboard behind a load balancer or front-facing proxy, then the app won't be able to detect that the connection is secure. In this case, you can start the dashboard with the `--trustProxy=1` option (or set the PARSE_DASHBOARD_TRUST_PROXY config var to 1) to rely on the X-Forwarded-* headers for the client's connection security.  This is useful for hosting on services like Heroku, where you can trust the provided proxy headers to correctly determine whether you're using HTTP or HTTPS.  You can also turn on this setting when using the dashboard as [express](https://github.com/expressjs/express) middleware:
+The deployed dashboard detects if you are using a secure connection. If you are deploying the dashboard behind a load balancer or front-facing proxy, then the app won't be able to detect that the connection is secure. In this case, you can start the dashboard with the `--trustProxy=1` option (or set the PARSE_DASHBOARD_TRUST_PROXY config var to 1) to rely on the X-Forwarded-\* headers for the client's connection security. This is useful for hosting on services like Heroku, where you can trust the provided proxy headers to correctly determine whether you're using HTTP or HTTPS. You can also turn on this setting when using the dashboard as [express](https://github.com/expressjs/express) middleware:
 
 ```javascript
 var trustProxy = true;
 var dashboard = new ParseDashboard({
-  "apps": [
+  apps: [
     {
-      "serverURL": "http://localhost:1337/parse",
-      "appId": "myAppId",
-      "masterKey": "myMasterKey",
-      "appName": "MyApp"
-    }
+      serverURL: "http://localhost:1337/parse",
+      appId: "myAppId",
+      masterKey: "myMasterKey",
+      appName: "MyApp",
+    },
   ],
-  "trustProxy": 1
+  trustProxy: 1,
 });
 ```
 
-
-
 ### Configuring Basic Authentication
+
 You can configure your dashboard for Basic Authentication by adding usernames and passwords your `parse-dashboard-config.json` configuration file:
 
 ```json
 {
-  "apps": [{"...": "..."}],
+  "apps": [{ "...": "..." }],
   "users": [
     {
-      "user":"user1",
-      "pass":"pass"
+      "user": "user1",
+      "pass": "pass"
     },
     {
-      "user":"user2",
-      "pass":"pass"
+      "user": "user2",
+      "pass": "pass"
     }
   ],
   "useEncryptedPasswords": true | false
@@ -350,31 +354,34 @@ You can store the password in either `plain text` or `bcrypt` formats. To use th
 You can encrypt the password using any online bcrypt tool e.g. [https://www.bcrypt-generator.com](https://www.bcrypt-generator.com).
 
 ### Separating App Access Based on User Identity
+
 If you have configured your dashboard to manage multiple applications, you can restrict the management of apps based on user identity.
 
 To do so, update your `parse-dashboard-config.json` configuration file to match the following format:
 
 ```json
 {
-  "apps": [{"...": "..."}],
+  "apps": [{ "...": "..." }],
   "users": [
-     {
-       "user":"user1",
-       "pass":"pass1",
-       "apps": [{"appId": "myAppId1"}, {"appId": "myAppId2"}]
-     },
-     {
-       "user":"user2",
-       "pass":"pass2",
-       "apps": [{"appId": "myAppId1"}]
-     }  ]
+    {
+      "user": "user1",
+      "pass": "pass1",
+      "apps": [{ "appId": "myAppId1" }, { "appId": "myAppId2" }]
+    },
+    {
+      "user": "user2",
+      "pass": "pass2",
+      "apps": [{ "appId": "myAppId1" }]
+    }
+  ]
 }
 ```
+
 The effect of such a configuration is as follows:
 
 When `user1` logs in, he/she will be able to manage `myAppId1` and `myAppId2` from the dashboard.
 
-When *`user2`*  logs in, he/she will only be able to manage *`myAppId1`* from the dashboard.
+When _`user2`_ logs in, he/she will only be able to manage _`myAppId1`_ from the dashboard.
 
 ## Use Read-Only masterKey
 
@@ -387,8 +394,8 @@ Start your `parse-server` with
 
 ```json
 {
-"masterKey": "YOUR_MASTER_KEY_HERE",
-"readOnlyMasterKey": "YOUR_READ_ONLY_MASTER_KEY",
+  "masterKey": "YOUR_MASTER_KEY_HERE",
+  "readOnlyMasterKey": "YOUR_READ_ONLY_MASTER_KEY"
 }
 ```
 
@@ -397,15 +404,15 @@ Then in your dashboard configuration:
 ```javascript
 var trustProxy = true;
 var dashboard = new ParseDashboard({
-  "apps": [
+  apps: [
     {
-      "serverURL": "http://localhost:1337/parse",
-      "appId": "myAppId",
-      "masterKey": "YOUR_READ_ONLY_MASTER_KEY",
-      "appName": "MyApp"
-    }
+      serverURL: "http://localhost:1337/parse",
+      appId: "myAppId",
+      masterKey: "YOUR_READ_ONLY_MASTER_KEY",
+      appName: "MyApp",
+    },
   ],
-  "trustProxy": 1
+  trustProxy: 1,
 });
 ```
 
@@ -421,7 +428,7 @@ You can mark a user as a read-only user:
       "appId": "myAppId1",
       "masterKey": "myMasterKey1",
       "readOnlyMasterKey": "myReadOnlyMasterKey1",
-      "serverURL": "myURL1",      
+      "serverURL": "myURL1",
       "port": 4040,
       "production": true
     },
@@ -429,22 +436,22 @@ You can mark a user as a read-only user:
       "appId": "myAppId2",
       "masterKey": "myMasterKey2",
       "readOnlyMasterKey": "myReadOnlyMasterKey2",
-      "serverURL": "myURL2",      
+      "serverURL": "myURL2",
       "port": 4041,
       "production": true
     }
   ],
   "users": [
     {
-      "user":"user1",
-      "pass":"pass1",
+      "user": "user1",
+      "pass": "pass1",
       "readOnly": true,
-      "apps": [{"appId": "myAppId1"}, {"appId": "myAppId2"}]
+      "apps": [{ "appId": "myAppId1" }, { "appId": "myAppId2" }]
     },
     {
-      "user":"user2",
-      "pass":"pass2",
-      "apps": [{"appId": "myAppId1"}]
+      "user": "user2",
+      "pass": "pass2",
+      "apps": [{ "appId": "myAppId1" }]
     }
   ]
 }
@@ -464,17 +471,20 @@ You can give read only access to a user on a per-app basis:
       "appId": "myAppId1",
       "masterKey": "myMasterKey1",
       "readOnlyMasterKey": "myReadOnlyMasterKey1",
-      "serverURL": "myURL",      
+      "serverURL": "myURL",
       "port": 4040,
       "production": true
     },
-    {"...": "..."}
+    { "...": "..." }
   ],
   "users": [
     {
-      "user":"user",
-      "pass":"pass",
-      "apps": [{"appId": "myAppId", "readOnly": true}, {"appId": "myAppId2"}]
+      "user": "user",
+      "pass": "pass",
+      "apps": [
+        { "appId": "myAppId", "readOnly": true },
+        { "appId": "myAppId2" }
+      ]
     }
   ]
 }
@@ -505,9 +515,9 @@ You can provide a list of locales or languages you want to support for your dash
 
 ## Run with Docker
 
-The official docker image is published on [docker hub](https://hub.docker.com/r/parseplatform/parse-dashboard) 
+The official docker image is published on [docker hub](https://hub.docker.com/r/parseplatform/parse-dashboard)
 
-Run the image with your ``config.json`` mounted as a volume
+Run the image with your `config.json` mounted as a volume
 
 ```
 docker run -d -p 8080:4040 -v host/path/to/config.json:/src/Parse-Dashboard/parse-dashboard-config.json parseplatform/parse-dashboard --dev
@@ -519,7 +529,7 @@ You can also pass the appId, masterKey and serverURL as arguments:
 docker run -d -p 4040:4040 parseplatform/parse-dashboard --dev --appId $APP_ID --masterKey $MASTER_KEY --serverURL $SERVER_URL
 ```
 
-By default, the container will start the app at port 4040 inside the container. However, you can run custom command as well (see ``Deploying in production`` for custom setup).
+By default, the container will start the app at port 4040 inside the container. However, you can run custom command as well (see `Deploying in production` for custom setup).
 
 In this example, we want to run the application in production mode at port 80 of the host machine.
 
@@ -527,15 +537,15 @@ In this example, we want to run the application in production mode at port 80 of
 docker run -d -p 80:8080 -v host/path/to/config.json:/src/Parse-Dashboard/parse-dashboard-config.json parse-dashboard --port 8080 --dev
 ```
 
-If you are not familiar with Docker, ``--port 8080`` will be passed in as argument to the entrypoint to form the full command ``npm start -- --port 8080``. The application will start at port 8080 inside the container and port ``8080`` will be mounted to port ``80`` on your host machine.
+If you are not familiar with Docker, `--port 8080` will be passed in as argument to the entrypoint to form the full command `npm start -- --port 8080`. The application will start at port 8080 inside the container and port `8080` will be mounted to port `80` on your host machine.
 
 # Contributing
 
 We really want Parse to be yours, to see it grow and thrive in the open source community. Please see the [Contributing to Parse Dashboard guide](CONTRIBUTING.md).
 
------
+---
 
-As of April 5, 2017, Parse, LLC has transferred this code to the parse-community organization, and will no longer be contributing to or distributing this code.
+As of April 5, 2017, Parse, LLC has transferred this code to the parse-community organization, and will no longer be contributing to or distributing this code
 
 [license-svg]: https://img.shields.io/badge/license-BSD-lightgrey.svg
 [license-link]: LICENSE

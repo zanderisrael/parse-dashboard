@@ -7,6 +7,8 @@
  */
 import Parse from 'parse';
 
+window.__Parse = Parse;
+
 // Given a className and a set of filters, generate a Parse.Query
 export default function queryFromFilters(className, filters) {
   let query;
@@ -24,7 +26,7 @@ export default function queryFromFilters(className, filters) {
 function addQueryConstraintFromObject(query, filter, constraintType) {
   let compareTo = JSON.parse(filter.get('compareTo'));
   for (let key of Object.keys(compareTo)) {
-    query[constraintType](filter.get('field')+'.'+key, compareTo[key]);
+    query[constraintType](filter.get('field') + '.' + key, compareTo[key]);
   }
 }
 
@@ -104,6 +106,21 @@ function addConstraint(query, filter) {
     case 'keyLte':
       addQueryConstraintFromObject(query, filter, 'lessThanOrEqualTo');
       break;
+    case 'custom':
+      const customConditionText = filter.get('compareTo')
+      const field = filter.get('field')
+      try {
+        const conditionData = JSON.parse(customConditionText);
+        const prevQueryData = query && query.toJSON();
+        let newQuery = Parse.Query.fromJSON(query.className, { where: { [field]: conditionData } });
+        const isOldQueryEmpty = !(query && prevQueryData.where && Object.getOwnPropertyNames(prevQueryData.where).length > 0);
+
+        if (!isOldQueryEmpty) {
+          newQuery = Parse.Query.and(query, newQuery);
+        }
+        query.withJSON(newQuery.toJSON());
+      } catch (e) {
+      }
   }
   return query;
 }
