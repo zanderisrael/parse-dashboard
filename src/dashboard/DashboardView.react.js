@@ -5,12 +5,12 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  */
-import PropTypes     from 'lib/PropTypes';
-import ParseApp      from 'lib/ParseApp';
-import React         from 'react';
-import Sidebar       from 'components/Sidebar/Sidebar.react';
+import PropTypes from 'lib/PropTypes';
+import ParseApp from 'lib/ParseApp';
+import React from 'react';
+import Sidebar from 'components/Sidebar/Sidebar.react';
 import SidebarToggle from 'components/Sidebar/SidebarToggle.react';
-import styles        from 'dashboard/Dashboard.scss';
+import styles from 'dashboard/Dashboard.scss';
 
 export default class DashboardView extends React.Component {
 
@@ -24,7 +24,7 @@ export default class DashboardView extends React.Component {
 
     if (!this.context.currentApp.hasCheckedForMigraton) {
       this.context.currentApp.getMigrations().promise
-        .then(() => this.forceUpdate(), () => {});
+        .then(() => this.forceUpdate(), () => { });
     }
 
     let features = this.context.currentApp.serverInfo.features;
@@ -114,6 +114,11 @@ export default class DashboardView extends React.Component {
         link: '/push/audiences'
       });
     }
+
+    pushSubsections.push({
+      name: 'Filters',
+      link: '/push/filters'
+    });
 
     let analyticsSidebarSections = [];
 
@@ -212,7 +217,7 @@ export default class DashboardView extends React.Component {
         name: 'Push',
         icon: 'push-outline',
         link: '/push',
-        style: {paddingLeft: '16px'},
+        style: { paddingLeft: '16px' },
         subsections: pushSubsections,
       });
     }
@@ -236,18 +241,18 @@ export default class DashboardView extends React.Component {
     }
 
     let sidebar = (
-    <Sidebar
-      sections={appSidebarSections}
-      appSelector={true}
-      section={this.section}
-      subsection={this.subsection}
-      prefix={'/apps/' + appSlug}
-      action={this.action}
-      primaryBackgroundColor={this.context.currentApp.primaryBackgroundColor}
-      secondaryBackgroundColor={this.context.currentApp.secondaryBackgroundColor}
+      <Sidebar
+        sections={appSidebarSections}
+        appSelector={true}
+        section={this.section}
+        subsection={this.subsection}
+        prefix={'/apps/' + appSlug}
+        action={this.action}
+        primaryBackgroundColor={this.context.currentApp.primaryBackgroundColor}
+        secondaryBackgroundColor={this.context.currentApp.secondaryBackgroundColor}
       >
-      {sidebarChildren}
-    </Sidebar>);
+        {sidebarChildren}
+      </Sidebar>);
 
     return (
       <div className={styles.dashboard}>

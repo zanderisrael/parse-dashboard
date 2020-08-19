@@ -31,6 +31,7 @@ import Migration          from './Data/Migration/Migration.react';
 import ParseApp           from 'lib/ParseApp';
 import Performance        from './Analytics/Performance/Performance.react';
 import PushAudiencesIndex from './Push/PushAudiencesIndex.react';
+import PushFiltersIndex from './Push/PushFiltersIndex.react';
 import PushDetails        from './Push/PushDetails.react';
 import PushIndex          from './Push/PushIndex.react';
 import PushNew            from './Push/PushNew.react';
@@ -303,6 +304,7 @@ export default class Dashboard extends React.Component {
             <PushIndex {...props} params={props.match.params} />
           )} />
           <Route path={ match.path + '/push/audiences' } component={PushAudiencesIndex} />
+          <Route path={ match.path + '/push/filters' } component={PushFiltersIndex} />
           <Route path={ match.path + '/push/new' } component={PushNew} />
           <Route path={ match.path + '/push/:pushId' } render={(props) => (
             <PushDetails {...props} params={props.match.params} />
