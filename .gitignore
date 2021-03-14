@@ -14,3 +14,4 @@ npm-debug.log
 
 logs/
 test_logs
+.package-lock.json
